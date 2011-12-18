@@ -1,0 +1,30 @@
+{% load i18n %}
+<h4>Treemap</h4>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+      google.load("visualization", "1", {packages:["treemap"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+          // Create and populate the data table.
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Region');
+          data.addColumn('string', 'Parent');
+          data.addColumn('number', 'Market trade volume (size)');
+          data.addColumn('number', 'Market increase/decrease (color)');
+          data.addRows([
+            {{ data|safe }}
+          ]);
+
+          // Create and draw the visualization.
+          var tree = new google.visualization.TreeMap(document.getElementById('visualization'));
+          tree.draw(data, {
+            minColor: '#f00',
+            midColor: '#ddd',
+            maxColor: '#0d0',
+            headerHeight: 15,
+            fontColor: 'black',
+            showScale: true});
+      }
+</script>
+Left-click to go down the hierarchy. Right-click to go back up.
+<div id="visualization" style="width: 1100px; height: 500px;"></div>
