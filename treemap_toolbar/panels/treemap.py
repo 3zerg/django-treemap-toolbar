@@ -10,7 +10,6 @@ from debug_toolbar.panels import DebugPanel
 import cProfile
 import pstats
 from cStringIO import StringIO
-from pyprof2calltree import CalltreeConverter
 
 
 class TreemapDebugPanel(DebugPanel):
